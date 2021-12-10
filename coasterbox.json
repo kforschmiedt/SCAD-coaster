@@ -1,0 +1,26 @@
+{
+    "parameterSets": {
+        "square 103x36": {
+            "$fn": "30",
+            "Height": "36",
+            "Offset": "6",
+            "Radius": "15",
+            "Round": "false",
+            "Thickness": "3",
+            "Width": "103",
+            "fa_rim": "3"
+        },
+        "round 106x36": {
+            "$fn": "120",
+            "Extend": "10",
+            "Height": "36",
+            "Offset": "4",
+            "Radius": "15",
+            "Round": "true",
+            "Thickness": "3",
+            "Width": "106",
+            "fa_rim": "3"
+        }
+    },
+    "fileFormatVersion": "1"
+}
