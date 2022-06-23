@@ -3,7 +3,6 @@ use <../lib/grommet.scad>
 /* [Size] */
 Diameter = 100;
 Height = 4.8;
-Rim_Height = 0.8;
 Sand_Height = 0.56;
 
 /* [Features] */
