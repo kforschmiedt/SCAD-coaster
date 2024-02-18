@@ -1,3 +1,10 @@
+/*
+ * ornament.scad - dangly things for Chriistmas trees
+ *
+ * (C) Copyright 2023 Kent Forschmiedt, All rights reserved
+ *
+ */
+
 use <../lib/grommet.scad>
 
 /* [Size] */

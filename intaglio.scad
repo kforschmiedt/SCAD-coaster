@@ -1,3 +1,10 @@
+/*
+ * intaglio.scad - coasters and refrigerator magnets
+ *
+ * (C) Copyright 2020-2024 Kent Forschmiedt, All rights reserved
+ *
+ */
+
 use <../little-box/files/boxlib.scad>
 use <../lib/grommet.scad>
 use <../lib/shapes.scad>

@@ -1,3 +1,10 @@
+/*
+ * coasterbox.scad - a nice box for your coasters
+ *
+ * (C) Copyright 2023 Kent Forschmiedt, All rights reserved
+ *
+ */
+
 use <../little-box/files/boxlib.scad>
 //use <../lib/grommet.scad>
 //use <../lib/shapes.scad>
