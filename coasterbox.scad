@@ -11,6 +11,8 @@ Height = 40;
 Offset = 10;
 Radius = 10;
 Extend = 10;
+XScale = 100;
+YScale = 100;
 
 $fn = 30;
 fa_rim = 3;
@@ -266,6 +268,7 @@ module SqBox()
 module Box()
 {
     if (Round) {
+        scale([XScale/100, YScale/100, 1])
         RoundBox();
     } else {
         SqBox();

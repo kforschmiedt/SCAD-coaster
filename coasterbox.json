@@ -20,6 +20,56 @@
             "Thickness": "3",
             "Width": "106",
             "fa_rim": "3"
+        },
+        "square 103x36 r5": {
+            "$fn": "30",
+            "Extend": "10",
+            "Height": "36",
+            "Offset": "6",
+            "Radius": "5",
+            "Round": "false",
+            "Thickness": "3",
+            "Width": "103",
+            "fa_rim": "3"
+        },
+        "design default values": {
+            "$fn": "30",
+            "Extend": "10",
+            "Height": "40",
+            "Offset": "10",
+            "Radius": "10",
+            "Round": "false",
+            "Thickness": "3.2",
+            "Width": "105",
+            "XScale": "100",
+            "YScale": "100",
+            "fa_rim": "3"
+        },
+        "Oval 75% 111x36": {
+            "$fn": "120",
+            "Extend": "10",
+            "Height": "36",
+            "Offset": "4",
+            "Radius": "15",
+            "Round": "true",
+            "Thickness": "3",
+            "Width": "110",
+            "XScale": "75",
+            "YScale": "100",
+            "fa_rim": "3"
+        },
+        "Oval 75% 125x36": {
+            "$fn": "120",
+            "Extend": "10",
+            "Height": "36",
+            "Offset": "4",
+            "Radius": "15",
+            "Round": "true",
+            "Thickness": "3",
+            "Width": "125",
+            "XScale": "75",
+            "YScale": "100",
+            "fa_rim": "3"
         }
     },
     "fileFormatVersion": "1"
