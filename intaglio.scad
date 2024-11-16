@@ -49,7 +49,7 @@ Graphic_XScale1 = 1.01;
 Graphic_YScale1 = 1.01;
 Graphic_Rotate1 = -2;
 Graphic_Scale_To1 = 0;
-Graphic_File1 = "c:/Users/kentf/Documents/CAD/Vector/pumpkin01.svg";
+Graphic_File1 = "d:/misc/CAD/Vector/halloween/pumpkin01.svg";
 
 /* [Graphic2] */
 Graphic2 = false;
@@ -65,7 +65,7 @@ Graphic_XScale2 = 1.01;
 Graphic_YScale2 = 1.01;
 Graphic_Rotate2 = -2;
 Graphic_Scale_To2 = 0;
-Graphic_File2 = "c:/Users/kentf/Documents/CAD/Vector/pumpkin01.svg";
+Graphic_File2 = "";
 
 /* [Graphic3] */
 Graphic3 = false;
@@ -81,7 +81,7 @@ Graphic_XScale3 = 1.01;
 Graphic_YScale3 = 1.01;
 Graphic_Rotate3 = -2;
 Graphic_Scale_To3 = 0;
-Graphic_File3 = "c:/Users/kentf/Documents/CAD/Vector/pumpkin01.svg";
+Graphic_File3 = "";
 
 /* [Graphic4] */
 Graphic4 = false;
@@ -97,11 +97,11 @@ Graphic_XScale4 = 1.01;
 Graphic_YScale4 = 1.01;
 Graphic_Rotate4 = -2;
 Graphic_Scale_To4 = 0;
-Graphic_File4 = "c:/Users/kentf/Documents/CAD/Vector/pumpkin01.svg";
+Graphic_File4 = "";
 
 /* [Text1] */
 Font1 = "Script MT Bold:style=Italic";
-Text1 = "test";
+Text1 = "";
 Text_Sub1 = false;
 Size1 = 10;
 XText1 = 0;
