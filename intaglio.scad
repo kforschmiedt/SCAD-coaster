@@ -16,7 +16,6 @@ Disc_Height = 4.75;
 Corner_Radius = 10;
 Rim_Radius = 3.9;
 Rim_Height = 0.75;
-Layer_Height = 0.25;
 Square_Disc = false;
 Rounded_Rim = false;
 Rounded_Radius = 2.5;
@@ -39,7 +38,6 @@ Magnet_Diameter = 2.2;
 Graphic1 = true;
 Graphic_Flip1 = false;
 Graphic_Sub1 = false;
-Graphic_Taper1 = 0;
 Graphic_Scale1 = 0.707;
 Graphic_Offset1 = -.001;
 Graphic_Xadj1 = 0.1;
@@ -55,7 +53,6 @@ Graphic_File1 = "d:/misc/CAD/Vector/halloween/pumpkin01.svg";
 Graphic2 = false;
 Graphic_Flip2 = false;
 Graphic_Sub2 = false;
-Graphic_Taper2 = 0;
 Graphic_Scale2 = 0.707;
 Graphic_Offset2 = -.001;
 Graphic_Xadj2 = 0.1;
@@ -71,7 +68,6 @@ Graphic_File2 = "";
 Graphic3 = false;
 Graphic_Flip3 = false;
 Graphic_Sub3 = false;
-Graphic_Taper3 = 0;
 Graphic_Scale3 = 0.707;
 Graphic_Offset3 = -.001;
 Graphic_Xadj3 = 0.1;
@@ -87,7 +83,6 @@ Graphic_File3 = "";
 Graphic4 = false;
 Graphic_Flip4 = false;
 Graphic_Sub4 = false;
-Graphic_Taper4 = 0;
 Graphic_Scale4 = 0.707;
 Graphic_Offset4 = -.001;
 Graphic_Xadj4 = 0;
@@ -144,28 +139,19 @@ Text_Rotate4 = 0;
 $fn=30;
 
 
-module __gr(Rim_Height, Layers, G_Extend, G_Offset, sv, rv, G_File)
+module __gr(Rim_Height, G_Extend, G_Offset, sv, rv, G_File)
 {
-    function oscale(n) = .1 + .11*pow(2.5*(Layers-n-1)/Layers, 2);
-    holist = concat(
-        [for (i=0; i < Layers; i=i+1)
-            [Layer_Height, G_Offset + oscale(i), i*Layer_Height]],
-        [[Rim_Height-Layers*Layer_Height, G_Offset, Layers * Layer_Height]]);
-    
-    for (ho = holist) {
-        translate([0, 0, ho[2]])
-        linear_extrude(ho[0]+G_Extend+.005)
-        offset(r=ho[1]) /*offset(delta=ho[1])*/
-        scale(sv)
-        resize(rv, auto=[true,true,false])
-            import(G_File, convexity=5);
-    }
+    // echo(Rim_Height=Rim_Height, G_Extend=G_Extend, G_Offset=G_Offset, sv=sv, rv=rv, G_File=G_File);
+    linear_extrude(G_Extend+.006)
+    offset(r = G_Offset)
+    scale(sv)
+    resize(rv, auto=[true,true,false])
+        import(G_File, convexity=5);
 }
 
 
 module _graphic(
         G_Flip,
-        G_Taper,
         G_Extend,
         G_Scale,
         G_Offset,
@@ -196,26 +182,26 @@ module _graphic(
     
     rad = Length_Diameter / 2;
 
-    translate([-rad+G_Xadj, -rad+G_Yadj,
-            Disc_Height+G_Zadj-G_Extend-Rim_Height-.004])
+    // echo("xlate: ", -rad+G_Xadj, -rad+G_Yadj, G_Zadj);
+    translate([-rad+G_Xadj, -rad+G_Yadj, G_Zadj-.004])
         rotate([0,0,G_Rotate])
         mirror([G_Flip?1:0,0,0])
-        __gr(Rim_Height, G_Taper, G_Extend, G_Offset, sv, rv, G_File);
+        __gr(Rim_Height, G_Extend, G_Offset, sv, rv, G_File);
 }
 
 module graphic(subtract=false)
 {
-    extend = Reverse_Image? 0: Rim_Height;
+    // value for top image
+    extend = Reverse_Image? 0: Disc_Height;
     if (Graphic1 && (subtract == Graphic_Sub1)) {
         _graphic(
             Graphic_Flip1,
-            Graphic_Taper1,
-            subtract?0:extend,
+            subtract? -Graphic_Zadj1 : extend,
             Graphic_Scale1,
             Graphic_Offset1,
             Graphic_Xadj1,
             Graphic_Yadj1,
-            Graphic_Zadj1,
+            Graphic_Zadj1 + (subtract? (Disc_Height - Rim_Height): 0),
             Graphic_XScale1,
             Graphic_YScale1,
             Graphic_Rotate1,
@@ -225,13 +211,12 @@ module graphic(subtract=false)
     if (Graphic2 && (subtract == Graphic_Sub2)) {
         _graphic(
             Graphic_Flip2,
-            Graphic_Taper2,
-            subtract?0:extend,
+            subtract? -Graphic_Zadj2 : extend,
             Graphic_Scale2,
             Graphic_Offset2,
             Graphic_Xadj2,
             Graphic_Yadj2,
-            Graphic_Zadj2,
+            Graphic_Zadj2 + (subtract? (Disc_Height - Rim_Height): 0),
             Graphic_XScale2,
             Graphic_YScale2,
             Graphic_Rotate2,
@@ -241,13 +226,12 @@ module graphic(subtract=false)
     if (Graphic3 && (subtract == Graphic_Sub3)) {
         _graphic(
             Graphic_Flip3,
-            Graphic_Taper3,
-            subtract?0:extend,
+            subtract? -Graphic_Zadj3 : extend,
             Graphic_Scale3,
             Graphic_Offset3,
             Graphic_Xadj3,
             Graphic_Yadj3,
-            Graphic_Zadj3,
+            Graphic_Zadj3 + (subtract? (Disc_Height - Rim_Height): 0),
             Graphic_XScale3,
             Graphic_YScale3,
             Graphic_Rotate3,
@@ -257,13 +241,12 @@ module graphic(subtract=false)
     if (Graphic4 && (subtract == Graphic_Sub4)) {
         _graphic(
             Graphic_Flip4,
-            Graphic_Taper4,
-            subtract?0:extend,
+            subtract? -Graphic_Zadj4 : extend,
             Graphic_Scale4,
             Graphic_Offset4,
             Graphic_Xadj4,
             Graphic_Yadj4,
-            Graphic_Zadj4,
+            Graphic_Zadj4 + (subtract? (Disc_Height - Rim_Height): 0),
             Graphic_XScale4,
             Graphic_YScale4,
             Graphic_Rotate4,
