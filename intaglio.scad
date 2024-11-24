@@ -141,7 +141,7 @@ $fn=30;
 
 module __gr(Rim_Height, G_Extend, G_Offset, sv, rv, G_File)
 {
-    // echo(Rim_Height=Rim_Height, G_Extend=G_Extend, G_Offset=G_Offset, sv=sv, rv=rv, G_File=G_File);
+    echo(Rim_Height=Rim_Height, G_Extend=G_Extend, G_Offset=G_Offset, sv=sv, rv=rv, G_File=G_File);
     linear_extrude(G_Extend+.006)
     offset(r = G_Offset)
     scale(sv)
@@ -182,7 +182,7 @@ module _graphic(
     
     rad = Length_Diameter / 2;
 
-    // echo("xlate: ", -rad+G_Xadj, -rad+G_Yadj, G_Zadj);
+    echo("xlate: ", -rad+G_Xadj, -rad+G_Yadj, G_Zadj);
     translate([-rad+G_Xadj, -rad+G_Yadj, G_Zadj-.004])
         rotate([0,0,G_Rotate])
         mirror([G_Flip?1:0,0,0])
@@ -192,7 +192,9 @@ module _graphic(
 module graphic(subtract=false)
 {
     // value for top image
-    extend = Reverse_Image? 0: Disc_Height;
+    extend = Reverse_Image? Rim_Height: Disc_Height;
+    zadjust = (subtract||Reverse_Image)? (Disc_Height - Rim_Height): 0;
+
     if (Graphic1 && (subtract == Graphic_Sub1)) {
         _graphic(
             Graphic_Flip1,
@@ -201,7 +203,7 @@ module graphic(subtract=false)
             Graphic_Offset1,
             Graphic_Xadj1,
             Graphic_Yadj1,
-            Graphic_Zadj1 + (subtract? (Disc_Height - Rim_Height): 0),
+            Graphic_Zadj1 + zadjust,
             Graphic_XScale1,
             Graphic_YScale1,
             Graphic_Rotate1,
@@ -216,7 +218,7 @@ module graphic(subtract=false)
             Graphic_Offset2,
             Graphic_Xadj2,
             Graphic_Yadj2,
-            Graphic_Zadj2 + (subtract? (Disc_Height - Rim_Height): 0),
+            Graphic_Zadj2 + zadjust,
             Graphic_XScale2,
             Graphic_YScale2,
             Graphic_Rotate2,
@@ -231,7 +233,7 @@ module graphic(subtract=false)
             Graphic_Offset3,
             Graphic_Xadj3,
             Graphic_Yadj3,
-            Graphic_Zadj3 + (subtract? (Disc_Height - Rim_Height): 0),
+            Graphic_Zadj3 + zadjust,
             Graphic_XScale3,
             Graphic_YScale3,
             Graphic_Rotate3,
@@ -246,7 +248,7 @@ module graphic(subtract=false)
             Graphic_Offset4,
             Graphic_Xadj4,
             Graphic_Yadj4,
-            Graphic_Zadj4 + (subtract? (Disc_Height - Rim_Height): 0),
+            Graphic_Zadj4 + zadjust,
             Graphic_XScale4,
             Graphic_YScale4,
             Graphic_Rotate4,
