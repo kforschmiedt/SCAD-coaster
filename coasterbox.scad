@@ -1,7 +1,7 @@
 /*
  * coasterbox.scad - a nice box for your coasters
  *
- * (C) Copyright 2023 Kent Forschmiedt, All rights reserved
+ * (C) Copyright 2023-2026 Kent Forschmiedt, All rights reserved
  *
  */
 
@@ -20,6 +20,7 @@ Radius = 10;
 Extend = 10;
 XScale = 100;
 YScale = 100;
+Notches = 1;  // [0, 1, 2, 3]
 
 $fn = 30;
 fa_rim = 3;
@@ -107,7 +108,7 @@ module SinWall(h, l, offset, thickness, start=90, end=270, over=0)
     wallpts = [
         for (x = [0:l])
         let (sina = sin(start + inc * x),
-             // extend ends a tiny mit so butt ends will fuse
+             // extend ends a tiny bit so butt ends will fuse
              xx = ((x==0)?-over:((x==l)?over:0)))
         each concat(
             [[x+xx, -thickness/2, 0]],
@@ -200,29 +201,46 @@ module RoundWall(h, r, thickness, start, end, dosin=true,
 
 module RoundBox()
 {
-
-    RoundWall(
-            h=Height,
-            r=Width/2, 
-            thickness=Thickness,
-            start=30,
-            end=330,
-            inc=2,
-            dosin=false
-    );
-
-    RoundWall(
-            h=Height,
-            r=Width/2, 
-            thickness=Thickness,
-            start=-30,
-            end=30,
-            inc=2,
-            dosin=true,
-            freq=6,
-            offset=Offset
-    );
-
+    notchmaps = [
+        [    // 0
+            [0, 360, -1, -1],
+        ], [ // 1
+            [30, 330, -30, 30],
+        ], [ // 2
+            [30, 150, -30, 30],
+            [210,330, 150, 210],
+        ], [ // 3
+            [30, 90, -30, 30],
+            [150, 210, 90, 150],
+            [270, 330, 210, 270],
+        ],
+    ];
+    
+    for (nm = notchmaps[Notches])
+    {
+        RoundWall(
+                h=Height,
+                r=Width/2, 
+                thickness=Thickness,
+                start=nm[0],
+                end=nm[1],
+                inc=2,
+                dosin=false
+        );
+        if (nm[2] != -1) {
+            RoundWall(
+                h=Height,
+                r=Width/2, 
+                thickness=Thickness,
+                start=nm[2],
+                end=nm[3],
+                inc=2,
+                dosin=true,
+                freq=6,
+                offset=Offset
+            );
+        }
+    }
     cylinder(h=Thickness, d=Width);
 }
 

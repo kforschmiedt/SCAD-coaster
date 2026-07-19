@@ -70,6 +70,33 @@
             "XScale": "75",
             "YScale": "100",
             "fa_rim": "3"
+        },
+        "square 109x36": {
+            "$fn": "30",
+            "Extend": "10",
+            "Height": "36",
+            "Offset": "6",
+            "Radius": "17",
+            "Round": "false",
+            "Thickness": "3",
+            "Width": "109",
+            "XScale": "100",
+            "YScale": "100",
+            "fa_rim": "3"
+        },
+        "Round 3 notch": {
+            "$fn": "120",
+            "Extend": "10",
+            "Height": "36",
+            "Notches": "3",
+            "Offset": "4",
+            "Radius": "15",
+            "Round": "true",
+            "Thickness": "3",
+            "Width": "106",
+            "XScale": "100",
+            "YScale": "100",
+            "fa_rim": "4"
         }
     },
     "fileFormatVersion": "1"
